@@ -18,14 +18,14 @@ public class ClienteMenu {
         int opcion;
 
         do {
-            System.out.println("\n--- MENÚ CLIENTES ---");
+            System.out.println("\n--- MENU CLIENTES ---");
             System.out.println("1. Registrar cliente");
             System.out.println("2. Listar clientes");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Opcion: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: ingrese solo números");
+                System.out.println("Error: ingrese solo numeros");
                 scanner.next();
             }
             opcion = scanner.nextInt();
@@ -54,25 +54,25 @@ public class ClienteMenu {
         System.out.print("Correo: ");
         String correo = scanner.nextLine();
 
-        System.out.print("Teléfono: ");
+        System.out.print("Telefono: ");
         String telefono = scanner.nextLine();
 
         Cliente cliente = new Cliente(id, nombre, documento, correo, telefono);
         clienteService.registrarCliente(cliente);
 
-        System.out.println("✔ Cliente registrado correctamente");
+        System.out.println("Cliente registrado correctamente");
     }
 
     private void listarClientes() {
 
         if (clienteService.listarClientes().isEmpty()) {
-            System.out.println("No hay clientes registrados.");
+            System.out.println("No hay clientes registrados");
             return;
         }
 
         System.out.println("\n-------------------------------------------------------------------");
         System.out.printf("%-4s %-18s %-15s %-25s %-10s%n",
-                "ID", "NOMBRE", "DOCUMENTO", "CORREO", "TELÉFONO");
+                "ID", "NOMBRE", "DOCUMENTO", "CORREO", "TELEFONO");
         System.out.println("-------------------------------------------------------------------");
 
         clienteService.listarClientes().forEach(c -> {

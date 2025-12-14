@@ -11,30 +11,31 @@ import java.util.Scanner;
 
 public class PrestamoMenu {
 
-    private PrestamoService prestamoService = new PrestamoService();
+    private PrestamoService prestamoService;
     private ClienteService clienteService;
     private EmpleadoService empleadoService;
     private Scanner scanner = new Scanner(System.in);
 
     public PrestamoMenu(ClienteService clienteService,
-                        EmpleadoService empleadoService) {
+                        EmpleadoService empleadoService,
+                        PrestamoService prestamoService) {
         this.clienteService = clienteService;
         this.empleadoService = empleadoService;
+        this.prestamoService = prestamoService;
     }
 
     public void mostrarMenu() {
-
         int opcion;
 
         do {
-            System.out.println("\n--- MENÚ PRÉSTAMOS ---");
-            System.out.println("1. Crear préstamo");
-            System.out.println("2. Listar préstamos");
+            System.out.println("\n--- MENU PRESTAMOS ---");
+            System.out.println("1. Crear prestamo");
+            System.out.println("2. Listar prestamos");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Opcion: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Ingrese solo números");
+                System.out.println("Ingrese solo numeros");
                 scanner.next();
             }
             opcion = scanner.nextInt();
@@ -55,7 +56,7 @@ public class PrestamoMenu {
         Cliente cliente = clienteService.buscarPorDocumento(docCliente);
 
         if (cliente == null) {
-            System.out.println("❌ Cliente no encontrado");
+            System.out.println("Cliente no encontrado");
             return;
         }
 
@@ -64,37 +65,34 @@ public class PrestamoMenu {
         Empleado empleado = empleadoService.buscarPorDocumento(docEmpleado);
 
         if (empleado == null) {
-            System.out.println("❌ Empleado no encontrado");
+            System.out.println("Empleado no encontrado");
             return;
         }
 
-        System.out.print("ID préstamo: ");
+        System.out.print("ID prestamo: ");
         int id = scanner.nextInt();
 
         System.out.print("Monto: ");
         double monto = scanner.nextDouble();
 
-        System.out.print("Interés (ej: 0.1 = 10%): ");
+        System.out.print("Interes (ej: 0.1 = 10%): ");
         double interes = scanner.nextDouble();
 
         System.out.print("Plazo en meses: ");
         int plazo = scanner.nextInt();
 
-        Prestamo prestamo = new Prestamo(
-                id, cliente, empleado, monto, interes, plazo
-        );
+        Prestamo prestamo = new Prestamo(id, cliente, empleado, monto, interes, plazo);
 
         prestamoService.registrarPrestamo(prestamo);
 
-        System.out.println("✔ Préstamo creado");
+        System.out.println("Prestamo creado");
         System.out.println("Monto total: " + prestamo.calcularMontoTotal());
         System.out.println("Cuota mensual: " + prestamo.calcularCuotaMensual());
     }
 
     private void listarPrestamos() {
-
         if (prestamoService.listarPrestamos().isEmpty()) {
-            System.out.println("No hay préstamos registrados");
+            System.out.println("No hay prestamos registrados");
             return;
         }
 
@@ -113,5 +111,7 @@ public class PrestamoMenu {
                     p.getSaldoPendiente(),
                     p.getEstado());
         });
+
+        System.out.println("----------------------------------------------------------------------------");
     }
 }

@@ -19,7 +19,7 @@ public class Empleado {
         this.salario = salario;
     }
 
-    // Getters y Setters
+    
     public int getId() {
         return id;
     }

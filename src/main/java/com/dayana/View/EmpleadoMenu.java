@@ -1,6 +1,6 @@
 package com.dayana.view;
 
-import com.dayana.model.Empleado;      
+import com.dayana.model.Empleado;
 import com.dayana.service.EmpleadoService;
 import java.util.Scanner;
 
@@ -17,14 +17,14 @@ public class EmpleadoMenu {
         int opcion;
 
         do {
-            System.out.println("\n--- MENÚ EMPLEADOS ---");
+            System.out.println("\n--- MENU EMPLEADOS ---");
             System.out.println("1. Registrar empleado");
             System.out.println("2. Listar empleados");
             System.out.println("0. Volver");
-            System.out.print("Opción: ");
+            System.out.print("Opcion: ");
 
             while (!scanner.hasNextInt()) {
-                System.out.println("Error: ingrese solo números");
+                System.out.println("Error: ingrese solo numeros");
                 scanner.next();
             }
             opcion = scanner.nextInt();
@@ -58,26 +58,24 @@ public class EmpleadoMenu {
         System.out.print("Salario: ");
         double salario = scanner.nextDouble();
 
-        Empleado empleado = new Empleado(
-                id, nombre, documento, rol, correo, salario
-        );
+        Empleado empleado = new Empleado(id, nombre, documento, rol, correo, salario);
 
         empleadoService.registrarEmpleado(empleado);
 
-        System.out.println("✔ Empleado registrado correctamente");
+        System.out.println("Empleado registrado correctamente");
     }
 
     private void listarEmpleados() {
 
         if (empleadoService.listarEmpleados().isEmpty()) {
-            System.out.println("No hay empleados registrados.");
+            System.out.println("No hay empleados registrados");
             return;
         }
 
-        System.out.println("\n---------------------------------------------------------------------------------------------");
+        System.out.println("\n---------------------------------------------------------------------------");
         System.out.printf("%-4s %-16s %-14s %-12s %-22s %-10s%n",
                 "ID", "NOMBRE", "DOCUMENTO", "ROL", "CORREO", "SALARIO");
-        System.out.println("-----------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
 
         empleadoService.listarEmpleados().forEach(e -> {
             System.out.printf("%-4d %-16s %-14s %-12s %-22s %-10.2f%n",
@@ -89,6 +87,6 @@ public class EmpleadoMenu {
                     e.getSalario());
         });
 
-        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------");
     }
 }
