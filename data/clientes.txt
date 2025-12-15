@@ -1,1 +1,7 @@
-1,Sara,1099738645,sarita12@gmail.com,3127689786
+-------- Lista de Clientes --------
+ID: 1
+Nombre: cristian melo
+Documento: 1336596548
+Correo: cristian@gmail.com
+Telefono: 3152025484
+---------------------------------

@@ -1,71 +1,103 @@
 package com.dayana.service;
 
-import com.dayana.model.Cliente;
-import java.util.ArrayList;
-import java.util.List;
+import com.dayana.Conector.ConexionMYSQL; // <--- IMPORT CORRECTO
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Scanner;
 import java.io.*;
 
 public class ClienteService {
 
-    private List<Cliente> clientes = new ArrayList<>();
+    public void registrarCliente(Scanner input){
+        String query = "INSERT INTO clientes(nombre, documento, correo, telefono) VALUES(?, ?, ?, ?)";
 
-    public ClienteService() {
-        cargarClientes();
-    }
-
-    public void registrarCliente(Cliente cliente) {
-        clientes.add(cliente);
-        guardarClientes();
-    }
-
-    public List<Cliente> listarClientes() {
-        return clientes;
-    }
-
-    public Cliente buscarPorDocumento(String documento) {
-        return clientes.stream()
-                .filter(c -> c.getDocumento().equals(documento))
-                .findFirst()
-                .orElse(null);
-    }
-
-    private void guardarClientes() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("data/clientes.txt"))) {
-            for (Cliente c : clientes) {
-                writer.write(c.getId() + "," + c.getNombre() + "," + c.getDocumento() + ","
-                        + c.getCorreo() + "," + c.getTelefono());
-                writer.newLine();
+        try (Connection conexion = ConexionMYSQL.conectar()) {  // <-- NOMBRE CORRECTO
+            if (conexion == null) {
+                System.out.println("No hay conexión con la base de datos");
+                return;
             }
-        } catch (IOException ex) {
-            System.out.println("Error al guardar clientes: " + ex.getMessage());
+
+            System.out.println("Ingrese los datos del cliente a registrar");
+
+            System.out.print("Nombre: ");
+            String nombre = input.nextLine();
+
+            System.out.print("Documento: ");
+            String documento = input.nextLine();
+
+            System.out.print("Correo: ");
+            String correo = input.nextLine();
+
+            System.out.print("Telefono: ");
+            String telefono = input.nextLine();
+
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, nombre);
+                stmt.setString(2, documento);
+                stmt.setString(3, correo);
+                stmt.setString(4, telefono);
+
+                int filas = stmt.executeUpdate();
+                System.out.println("Cliente fue registrado correctamente");
+                System.out.println("Filas afectadas: " + filas);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al registrar el cliente");
+            e.printStackTrace();
         }
     }
 
-    private void cargarClientes() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("data/clientes.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(",");
-                Cliente c = new Cliente(
-                        Integer.parseInt(datos[0]),
-                        datos[1],
-                        datos[2],
-                        datos[3],
-                        datos[4]
-                );
-                clientes.add(c);
+    public void listaClientes() {
+        String query = "SELECT * FROM clientes";
+        String archivo = "data/clientes.txt";
+    
+        try (Connection conexion = ConexionMYSQL.conectar();
+             PreparedStatement stmt = conexion.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery();
+             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(archivo)))) {
+    
+            boolean hayCliente = false;
+    
+            System.out.println("-------- Lista de Clientes --------");
+            pw.println("-------- Lista de Clientes --------");
+    
+            while (rs.next()) {
+                hayCliente = true;
+    
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String documento = rs.getString("documento");
+                String correo = rs.getString("correo");
+                String telefono = rs.getString("telefono");
+    
+                // Mostrar por consola
+                System.out.println("ID: " + id);
+                System.out.println("Nombre: " + nombre);
+                System.out.println("Documento: " + documento);
+                System.out.println("Correo: " + correo);
+                System.out.println("Telefono: " + telefono);
+                System.out.println("---------------------------------");
+    
+                // Guardar en archivo
+                pw.println("ID: " + id);
+                pw.println("Nombre: " + nombre);
+                pw.println("Documento: " + documento);
+                pw.println("Correo: " + correo);
+                pw.println("Telefono: " + telefono);
+                pw.println("---------------------------------");
             }
-        } catch (FileNotFoundException ex) {
-            
-        } catch (IOException ex) {
-            System.out.println("Error al cargar clientes: " + ex.getMessage());
+    
+            if (!hayCliente) {
+                System.out.println("No hay clientes registrados");
+                pw.println("No hay clientes registrados");
+            }
+    
+        } catch (Exception e) {
+            System.out.println("Error al listar clientes");
+            e.printStackTrace();
         }
     }
-
-    public Cliente buscarPorId(int id) {
-        return clientes.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
+    // listaClientes() permanece igual, solo reemplazar conexionMysql -> ConexionMYSQL
 }

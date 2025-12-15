@@ -1,0 +1,15 @@
+-------- Lista de Empleados --------
+ID: 1
+Nombre: fernando martinez
+Documento: 1265396596
+Rol: Asesor
+Correo: fernando@gmail.com
+Salario: 5000000.0
+---------------------------------
+ID: 2
+Nombre: diego mk
+Documento: 1236596845
+Rol: Contador
+Correo: diegomk@gmail.com
+Salario: 1000000.0
+---------------------------------
