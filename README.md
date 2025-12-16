@@ -5,40 +5,6 @@ El proyecto permite registrar, consultar y persistir informacion usando archivos
 
 ---
 
-## Estructura del proyecto
-
-PROJECT_CREDIYA
-├── data
-│   ├── clientes.txt
-│   ├── empleados.txt
-│   ├── prestamos.txt
-│   └── pagos.txt
-│
-├── src/main/java/com/dayana
-│   ├── Conector
-│   │   ├── ConexionMYSQL.java
-│   │   └── BasededatosMYSQL.sql
-│   │
-│   ├── service
-│   │   ├── ClienteService.java
-│   │   ├── EmpleadoService.java
-│   │   ├── PrestamoService.java
-│   │   ├── PagoService.java
-│   │   └── ReportesService.java
-│   │
-│   └── view
-│       ├── Main.java
-│       ├── ClienteMenu.java
-│       ├── EmpleadoMenu.java
-│       ├── PrestamosMenu.java
-│       ├── PagoMenu.java
-│       └── Reportes.java
-│
-├── pom.xml
-└── README.md
-
----
-
 ## Funcionalidades
 
 ### Modulo de Empleados
