@@ -1,11 +1,9 @@
-# Sistema de Cobros de Cartera – CrediYa 💵
+# Sistema de Cobros de Cartera – CrediYa 
 
 Sistema de consola desarrollado en Java para la gestion de empleados, clientes, prestamos y pagos de la empresa CrediYa S.A.S.
 El proyecto permite registrar, consultar y persistir informacion usando archivos de texto y esta preparado para conexion a MySQL mediante JDBC.
 
 ---
-
-## Funcionalidades
 
 ### Modulo de Empleados
 - Registro de empleados
