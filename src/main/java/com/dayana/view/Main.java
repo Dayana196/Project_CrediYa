@@ -1,7 +1,5 @@
 package com.dayana.view;
 
-
-
 import java.util.Scanner;
 
 public class Main {
@@ -18,8 +16,10 @@ public class Main {
             System.out.println("2. Modulo Clientes");
             System.out.println("3. Modulo Prestamos");
             System.out.println("4. Modulo Pagos");
+            System.out.println("5. Generar Reportes");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opcion: ");
+
 
             while (!scanner.hasNextInt()) {
                 System.out.println("Error: ingrese solo numeros");
@@ -33,6 +33,7 @@ public class Main {
                 case 2 -> new ClienteMenu().mostrarMenu();
                 case 3 -> new PrestamosMenu().prestamosMenu();
                 case 4 -> new PagoMenu().mostrarMenu();
+                case 5 -> new ReportesMenu().mostrarMenu();
                 case 0 -> System.out.println("Saliendo del sistema...");
                 default -> System.out.println("Opcion invalida");
             }
@@ -42,3 +43,7 @@ public class Main {
         scanner.close();
     }
 }
+
+
+
+

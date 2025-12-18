@@ -24,7 +24,7 @@ public class PagoMenu {
                 input.next();
             }
             opcion = input.nextInt();
-            input.nextLine(); // Limpiar buffer
+            input.nextLine();
 
             switch (opcion) {
                 case 1 -> servicio.registrarPago(input);
