@@ -35,3 +35,16 @@ CREATE TABLE pagos (
     monto DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (prestamo_id) REFERENCES prestamos(id)
 );
+
+CREATE TABLE reportes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    empleado_id INT NOT NULL,
+    monto DECIMAL(12,2) NOT NULL,
+    interes DECIMAL(5,2) NOT NULL,
+    cuotas INT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY (empleado_id) REFERENCES empleado(id)
+)

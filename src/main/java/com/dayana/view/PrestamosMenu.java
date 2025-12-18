@@ -15,7 +15,7 @@ public class PrestamosMenu {
             System.out.println("""
                 ------------- Prestamos Menu -------------
                     1. Crear Prestamo
-                    2. SimulaciÃ³n de Prestamo
+                    2. Simulacion de Prestamo
                     3. Cambiar Estado Prestamo
                     4. Consultar Prestamo
                     5. Lista de Prestamos

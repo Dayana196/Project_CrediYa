@@ -1,7 +1,13 @@
 -------- Lista de Clientes --------
 ID: 1
-Nombre: cristian melo
-Documento: 1336596548
-Correo: cristian@gmail.com
-Telefono: 3152025484
+Nombre: santiago
+Documento: 1099738632
+Correo: santi1@gmail.com
+Telefono: 3125729899
+---------------------------------
+ID: 2
+Nombre: samuel
+Documento: 1947357934
+Correo: samu@gmail.com
+Telefono: 3126573948
 ---------------------------------
